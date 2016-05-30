@@ -70,11 +70,11 @@ public interface IConstants {
 
 	public static final String CONSTRAINT_PROPERTIES_FILE = "constraint.properties";
 
-	public static final String CUSTOMER1_TRUCK_FILENAME = "LKWDaten156.txt";
+	public static final String CUSTOMER1_TRUCK_FILENAME = "xyz.txt";
 
 	public static final String CUSTOMER1_TRUCK_TYPES_FILENAME = "";
 
-	public static final String LOCATION_SQL_FILENAME = "location_DHL.sql";
+	public static final String LOCATION_SQL_FILENAME = "abc.sql";
 	
 
 	/**
