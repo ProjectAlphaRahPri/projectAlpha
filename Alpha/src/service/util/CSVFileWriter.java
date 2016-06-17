@@ -8,12 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * @author fhurrle
- * 
- */
-public class CSVFileWriter
-{
+public class CSVFileWriter {
 
 	/**
 	 * 
@@ -21,8 +16,8 @@ public class CSVFileWriter
 	 * @param data
 	 * @param seperator
 	 */
-	public void writeFile(String filename, List<String[]> data, String seperator)
-	{
+	public void writeFile(String filename, List<String[]> data,
+			String seperator) {
 
 		try {
 			FileWriter fstream = new FileWriter(filename);

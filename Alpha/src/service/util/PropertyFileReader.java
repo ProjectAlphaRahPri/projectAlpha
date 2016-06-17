@@ -6,18 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * @author Stefan Glaser
- */
-public class PropertyFileReader
-{
-	public static Properties readProperties(String fileName)
-	{
-		return readProperties(fileName, null);
-	}
-
-	public static Properties readProperties(String fileName, Properties parentProperties)
-	{
+public class PropertyFileReader {
+	public static Properties readProperties(String fileName,
+			Properties parentProperties) {
 		Properties props = new Properties(parentProperties);
 
 		if (fileName == null) {
@@ -30,7 +21,8 @@ public class PropertyFileReader
 			props.load(stream);
 			stream.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Config-File not Found: " + fileName + "\nFallback to default!");
+			System.out.println("Config-File not Found: " + fileName
+					+ "\nFallback to default!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

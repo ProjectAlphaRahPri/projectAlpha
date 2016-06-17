@@ -10,12 +10,8 @@ import java.util.List;
 
 /**
  * Class to read any text File separated by any separation string
- * 
- * @author Rajit Shahi
- * 
  */
-public class CSVFileReader
-{
+public class CSVFileReader {
 
 	/**
 	 * Enum for defining the separator in the file
@@ -28,13 +24,11 @@ public class CSVFileReader
 
 		private String sepString;
 
-		private Seperator(String sepString)
-		{
+		private Seperator(String sepString) {
 			this.sepString = sepString;
 		}
 
-		public String getSeperatorString()
-		{
+		public String getSeperatorString() {
 			return this.sepString;
 		}
 	}
@@ -42,12 +36,14 @@ public class CSVFileReader
 	/**
 	 * reads the text based file
 	 * 
-	 * @param filename name of the file to read
-	 * @param seperator Seperator Enum
+	 * @param filename
+	 *            name of the file to read
+	 * @param seperator
+	 *            Seperator Enum
 	 * @return list of string arrays each array containing Strings from the file
 	 */
-	public static List<String[]> readFile(String filename, Seperator seperator)
-	{
+	public static List<String[]> readFile(String filename,
+			Seperator seperator) {
 		List<String[]> aList = new ArrayList<String[]>();
 
 		try {

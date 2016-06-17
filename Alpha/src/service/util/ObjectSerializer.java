@@ -1,6 +1,3 @@
-/**
- * 
- */
 package service.util;
 
 import java.io.FileInputStream;
@@ -11,17 +8,15 @@ import java.io.ObjectOutputStream;
 
 /**
  * Class to serialize/de-serialize objects to file.
- * @author Srinivasa Ragavan
  * 
  */
-public class ObjectSerializer
-{
+public class ObjectSerializer {
 	/**
 	 * @param object
 	 * @param qualifiedFilePath
 	 */
-	public static void serializeToFile(Object object, String qualifiedFilePath)
-	{
+	public static void serializeToFile(Object object,
+			String qualifiedFilePath) {
 		try {
 			FileOutputStream fos = new FileOutputStream(qualifiedFilePath);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -40,9 +35,8 @@ public class ObjectSerializer
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static Object deserializeFromFile(String qualifiedFilePath) throws IOException,
-			ClassNotFoundException
-	{
+	public static Object deserializeFromFile(String qualifiedFilePath)
+			throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(qualifiedFilePath);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Object object = ois.readObject();

@@ -16,12 +16,9 @@ import service.log.PreciseFormatter;
  * <p>
  * Console logging is specified by calling a parameterless constructor
  * 
- * @author Rajit Shahi
- * 
  */
 
-public class Logger implements ILogger
-{
+public class Logger implements ILogger {
 	private static final LogManager lm = LogManager.getLogManager();
 
 	private static FileHandler fileHandler;
@@ -33,8 +30,7 @@ public class Logger implements ILogger
 	private static final java.util.logging.Logger alogger = java.util.logging.Logger
 			.getLogger(CLASS_NAME);
 
-	public Logger()
-	{
+	public Logger() {
 		alogger.setLevel(Level.INFO);
 	}
 
@@ -43,17 +39,17 @@ public class Logger implements ILogger
 	 * get stored.
 	 * 
 	 * @param loggerName
-	 * @param fileName name of the log file
+	 * @param fileName
+	 *            name of the log file
 	 */
-	public Logger(String fileName)
-	{
+	public Logger(String fileName) {
 		alogger.setLevel(Level.INFO);
 		setFileHandler(fileName, false);
 	}
 
 	@Override
-	public synchronized boolean setFileHandler(String fileName, boolean append)
-	{
+	public synchronized boolean setFileHandler(String fileName,
+			boolean append) {
 		final String methodName = "setFile()";
 
 		if (fileName == "" || fileName == null) {
@@ -72,16 +68,18 @@ public class Logger implements ILogger
 			alogger.addHandler(fileHandler);
 
 		} catch (Exception e) {
-			log(alogger.getLevel(), CLASS_NAME, methodName, new Object[] { "logfile '", fileName,
-					"' could not be closed, switching to logfile '", fileName, "' failed" }, e);
+			log(alogger.getLevel(), CLASS_NAME, methodName,
+					new Object[] { "logfile '", fileName,
+							"' could not be closed, switching to logfile '",
+							fileName, "' failed" },
+					e);
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public synchronized void closeFileHandler()
-	{
+	public synchronized void closeFileHandler() {
 
 		final String methodName = "closeFile()";
 
@@ -90,13 +88,13 @@ public class Logger implements ILogger
 				fileHandler.close();
 				fileHandler = null;
 			} catch (Exception e) {
-				log(alogger.getLevel(), CLASS_NAME, methodName, "closing log File failed", e);
+				log(alogger.getLevel(), CLASS_NAME, methodName,
+						"closing log File failed", e);
 			}
 	}
 
 	@Override
-	public synchronized boolean hasFileHandler()
-	{
+	public synchronized boolean hasFileHandler() {
 		if ((fileHandler == null)) {
 			return false;
 		}
@@ -105,72 +103,64 @@ public class Logger implements ILogger
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String className, String methodName,
-			String logNotice, Throwable throwable)
-	{
+	public synchronized void log(Level alevel, String className,
+			String methodName, String logNotice, Throwable throwable) {
 		alogger.logp(alevel, className, methodName, logNotice, throwable);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String className, String methodName,
-			Object[] logNotice, Throwable throwable)
-	{
+	public synchronized void log(Level alevel, String className,
+			String methodName, Object[] logNotice, Throwable throwable) {
 		log(alevel, className, methodName, logNotice);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String className, String methodName,
-			Throwable throwable)
-	{
+	public synchronized void log(Level alevel, String className,
+			String methodName, Throwable throwable) {
 		alogger.logp(alevel, className, methodName, "", throwable);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String className, String methodName, String logNotice)
-	{
+	public synchronized void log(Level alevel, String className,
+			String methodName, String logNotice) {
 		alogger.logp(alevel, className, methodName, logNotice);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String className, String methodName,
-			Object[] logNotice)
-	{
+	public synchronized void log(Level alevel, String className,
+			String methodName, Object[] logNotice) {
 		alogger.logp(alevel, className, methodName, "", logNotice);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String logNotice, Throwable throwable)
-	{
+	public synchronized void log(Level alevel, String logNotice,
+			Throwable throwable) {
 		alogger.log(alevel, logNotice, throwable);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, Object[] logNotice, Throwable throwable)
-	{
+	public synchronized void log(Level alevel, Object[] logNotice,
+			Throwable throwable) {
 		alogger.log(alevel, "", logNotice);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, Throwable throwable)
-	{
+	public synchronized void log(Level alevel, Throwable throwable) {
 		alogger.log(alevel, "", throwable);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, String logNotice)
-	{
+	public synchronized void log(Level alevel, String logNotice) {
 		alogger.log(alevel, logNotice);
 	}
 
 	@Override
-	public synchronized void log(Level alevel, Object[] logNotice)
-	{
+	public synchronized void log(Level alevel, Object[] logNotice) {
 		alogger.log(alevel, "", logNotice);
 	}
 
 	@Override
-	public synchronized void setLogLevel(Level level)
-	{
+	public synchronized void setLogLevel(Level level) {
 		Handler[] handlers = alogger.getHandlers();
 		for (int index = 0; index < handlers.length; index++) {
 			handlers[index].setLevel(Level.FINE);
@@ -180,8 +170,8 @@ public class Logger implements ILogger
 	}
 
 	@Override
-	public synchronized boolean setFormatter(java.util.logging.Formatter formatter)
-	{
+	public synchronized boolean setFormatter(
+			java.util.logging.Formatter formatter) {
 		if (fileHandler == null)
 			return false;
 

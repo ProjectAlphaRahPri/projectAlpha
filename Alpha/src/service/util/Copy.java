@@ -15,22 +15,19 @@ import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
 /**
  * Utility for copying serialized objects
- * @author Srinivasa Ragavan
- * 
  */
-public class Copy
-{
+public class Copy {
 
-	public static <T> T deepCopy(T obj) throws IOException, ClassNotFoundException
-	{
+	public static <T> T deepCopy(T obj)
+			throws IOException, ClassNotFoundException {
 		/** Results are for copying a Route 10.000 times. Time is in ms */
 
 		/**
-		 * Best Result - 15ms. By using copy constructor everywhere, in it's true
-		 * sense :-) Below results are for using serialization in all/some places.
+		 * Best Result - 15ms. By using copy constructor everywhere, in it's
+		 * true sense :-) Below results are for using serialization in all/some
+		 * places.
 		 */
 
 		// return normalCopy(obj); //-slow
@@ -55,15 +52,18 @@ public class Copy
 	/**
 	 * Creates a deepCopy of an object by serialization and deserialization.
 	 * Objects should implement java.io.Serializable.
+	 * 
 	 * @param <T>
-	 * @param sourceObject object to be copied
+	 * @param sourceObject
+	 *            object to be copied
 	 * @return copy of the sourceObject. Will not contain transient and static
 	 *         fields
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T normalCopy(final T sourceObject) throws IOException, ClassNotFoundException
+	public static <T> T normalCopy(final T sourceObject)
+			throws IOException, ClassNotFoundException
 
 	{
 		T result = null;
@@ -91,8 +91,7 @@ public class Copy
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T deepCopyWithFastByteArray(T orig)
-	{
+	public static <T> T deepCopyWithFastByteArray(T orig) {
 		T result = null;
 		try {
 			// Write the object out to a byte array
@@ -116,8 +115,8 @@ public class Copy
 
 	/** with annotations */
 
-	public static <T> T deepCopyWithAnnotations(T x) throws IOException, ClassNotFoundException
-	{
+	public static <T> T deepCopyWithAnnotations(T x)
+			throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		CloneOutput cout = new CloneOutput(bout);
 		cout.writeObject(x);
@@ -131,9 +130,8 @@ public class Copy
 		return clone;
 	}
 
-	public static <T> T deepCopyWithFBArrayAndAnnotations(T x) throws IOException,
-			ClassNotFoundException
-	{
+	public static <T> T deepCopyWithFBArrayAndAnnotations(T x)
+			throws IOException, ClassNotFoundException {
 		// ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		FastByteArrayOutputStream bout = new FastByteArrayOutputStream();
 		CloneOutput cout = new CloneOutput(bout);
@@ -146,57 +144,49 @@ public class Copy
 		return clone;
 	}
 
-	private static class CloneOutput extends ObjectOutputStream
-	{
+	private static class CloneOutput extends ObjectOutputStream {
 		Queue<Class<?>> classQueue = new LinkedList<Class<?>>();
 
-		CloneOutput(OutputStream out) throws IOException
-		{
+		CloneOutput(OutputStream out) throws IOException {
 			super(out);
 		}
 
 		@Override
-		protected void annotateClass(Class<?> c)
-		{
+		protected void annotateClass(Class<?> c) {
 			classQueue.add(c);
 		}
 
 		@Override
-		protected void annotateProxyClass(Class<?> c)
-		{
+		protected void annotateProxyClass(Class<?> c) {
 			classQueue.add(c);
 		}
 	}
 
-	private static class CloneInput extends ObjectInputStream
-	{
+	private static class CloneInput extends ObjectInputStream {
 		private final CloneOutput output;
 
-		CloneInput(InputStream in, CloneOutput output) throws IOException
-		{
+		CloneInput(InputStream in, CloneOutput output) throws IOException {
 			super(in);
 			this.output = output;
 
 		}
 
 		@Override
-		protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException,
-				ClassNotFoundException
-		{
+		protected Class<?> resolveClass(ObjectStreamClass desc)
+				throws IOException, ClassNotFoundException {
 			Class<?> c = output.classQueue.poll();
 			String expected = desc.getName();
 			String found = (c == null) ? null : c.getName();
 			if (!expected.equals(found)) {
-				throw new InvalidClassException("Classes desynchronized: " + "found " + found
-						+ " when expecting " + expected);
+				throw new InvalidClassException("Classes desynchronized: "
+						+ "found " + found + " when expecting " + expected);
 			}
 			return c;
 		}
 
 		@Override
-		protected Class<?> resolveProxyClass(String[] interfaceNames) throws IOException,
-				ClassNotFoundException
-		{
+		protected Class<?> resolveProxyClass(String[] interfaceNames)
+				throws IOException, ClassNotFoundException {
 			return output.classQueue.poll();
 		}
 	}

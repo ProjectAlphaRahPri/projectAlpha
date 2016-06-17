@@ -6,18 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * @author Stefan Glaser
- */
-public class PropertyFileWriter
-{
-	public static void writeProperties(Properties props, String fileName)
-	{
+public class PropertyFileWriter {
+	public static void writeProperties(Properties props, String fileName) {
 		writeProperties(props, fileName, "");
 	}
 
-	public static void writeProperties(Properties props, String fileName, String comments)
-	{
+	public static void writeProperties(Properties props, String fileName,
+			String comments) {
 		BufferedOutputStream out;
 		try {
 			out = new BufferedOutputStream(new FileOutputStream(fileName));

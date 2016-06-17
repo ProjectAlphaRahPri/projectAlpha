@@ -1,15 +1,9 @@
 package shippingCore.constraint;
 
 /**
- * 
- */
-
-/**
  * Factory from which all constraints, both soft and hard are accessible.
- * @author Srinivasa Ragavan
  */
-public interface IConstraintFactory
-{
+public interface IConstraintFactory {
 	/**
 	 * @return the capacityTypeConstraint
 	 */

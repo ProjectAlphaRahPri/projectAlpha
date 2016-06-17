@@ -1,4 +1,4 @@
-package shippingCore;
+package service.properties;
 
 import java.io.File;
 
@@ -21,7 +21,7 @@ public interface IConstants {
 
 	/** One week in milli seconds. */
 	int WEEK = 7 * DAY;
-	
+
 	/**
 	 * file name of DistanceMap File (EWS Format)
 	 */
@@ -31,38 +31,40 @@ public interface IConstants {
 	 * file name of DistanceMap File (EWS Format)
 	 */
 	public static final String DISTANCEMAP_DIMABIGENDIAN_FILE = "Dima-BigEndian.dat";
-	
-	/**
-	 * file location path of DistanceMap File
-	 */
-	public static final String DISTANCEMAP_EWS_FILE_PATH = System.getProperty("user.dir")
-			+ File.separator + "distanceMap" + File.separator + DISTANCEMAP_EWS_FILE;
 
 	/**
 	 * file location path of DistanceMap File
 	 */
-	public static final String DISTANCEMAP_DIMABIGENDIAN_FILE_PATH = System.getProperty("user.dir")
-			+ File.separator + "distanceMap" + File.separator + DISTANCEMAP_DIMABIGENDIAN_FILE;
+	public static final String DISTANCEMAP_EWS_FILE_PATH = System
+			.getProperty("user.dir") + File.separator + "distanceMap"
+			+ File.separator + DISTANCEMAP_EWS_FILE;
+
+	/**
+	 * file location path of DistanceMap File
+	 */
+	public static final String DISTANCEMAP_DIMABIGENDIAN_FILE_PATH = System
+			.getProperty("user.dir") + File.separator + "distanceMap"
+			+ File.separator + DISTANCEMAP_DIMABIGENDIAN_FILE;
 
 	/** file location path of misc Files */
-	public static final String MISC_FILES_PATH = System.getProperty("user.dir") + File.separator
-			+ "miscfiles" + File.separator;
+	public static final String MISC_FILES_PATH = System.getProperty("user.dir")
+			+ File.separator + "miscfiles" + File.separator;
 
 	/** file location path of data Files */
-	public static final String DATA_FILES_PATH = System.getProperty("user.dir") + File.separator
-			+ "data" + File.separator;
+	public static final String DATA_FILES_PATH = System.getProperty("user.dir")
+			+ File.separator + "data" + File.separator;
 
 	/** file location path of benchmark data Files */
-	public static final String DATA_BENCHMARK_PATH = System.getProperty("user.dir") + File.separator
-			+ "data" + File.separator + "benchmark" + File.separator + "800customer" + File.separator
-			+ "LR181.txt";
+	public static final String DATA_BENCHMARK_PATH = System.getProperty(
+			"user.dir") + File.separator + "data" + File.separator + "benchmark"
+			+ File.separator + "800customer" + File.separator + "LR181.txt";
 
 	/** file location path of configuration Files */
-	public static final String CONFIG_FILES_PATH = System.getProperty("user.dir") + File.separator
-			+ "configuration" + File.separator;
+	public static final String DEFAULT_CONFIG_FILES_PATH = System.getProperty(
+			"user.dir") + File.separator + "configuration" + File.separator;
 
-	/** General Properties file for attractive */
-	public static final String ATTRACTIVE_PROPERTIES_FILE = "attractive.properties";
+	/** General Properties file for the shipping system */
+	public static final String SHIPPING_PROPERTIES_FILE = "shipping.properties";
 
 	public static final String LOCAL_OPTIMIZATION_PROPERTIES_FILE = "localOptimization.properties";
 
@@ -75,7 +77,6 @@ public interface IConstants {
 	public static final String CUSTOMER1_TRUCK_TYPES_FILENAME = "";
 
 	public static final String LOCATION_SQL_FILENAME = "abc.sql";
-	
 
 	/**
 	 * The default size of a {@link StringBuffer}. Should be used for nearly
@@ -96,8 +97,8 @@ public interface IConstants {
 	int EXIT_CODE_CONNECTION_FAILURE = 5;
 
 	/**
-	 * The Java Virtual Machine is terminated with exit code 31, if configuration
-	 * file has no keys for the module file.
+	 * The Java Virtual Machine is terminated with exit code 31, if
+	 * configuration file has no keys for the module file.
 	 */
 	int EXIT_CODE_NO_KEYS_FOR_MODULE_FILE = 31;
 
@@ -130,14 +131,14 @@ public interface IConstants {
 	int EXIT_CODE_SECURITY_MANAGER_ALREADY_SET = 10;
 
 	/**
-	 * The Java Virtual Machine is terminated with exit code 4, if any unforeseen
-	 * Error is caught.
+	 * The Java Virtual Machine is terminated with exit code 4, if any
+	 * unforeseen Error is caught.
 	 */
 	int EXIT_CODE_UNFORESEEN_ERROR = 4;
 
 	/**
-	 * The Java Virtual Machine is terminated with exit code 3, if any unforeseen
-	 * RuntimeException is caught.
+	 * The Java Virtual Machine is terminated with exit code 3, if any
+	 * unforeseen RuntimeException is caught.
 	 */
 	int EXIT_CODE_UNFORESEEN_EXCEPTION = 3;
 
@@ -146,9 +147,9 @@ public interface IConstants {
 	//
 
 	/**
-	 * The Java Virtual Machine is terminated with exit code 30, if configuration
-	 * is wrong somehow (for example a system configuration file has a severe
-	 * error).
+	 * The Java Virtual Machine is terminated with exit code 30, if
+	 * configuration is wrong somehow (for example a system configuration file
+	 * has a severe error).
 	 */
 	int EXIT_CODE_WRONG_CONFIGURATION = 30;
 
@@ -183,6 +184,5 @@ public interface IConstants {
 	 * types where null is not possible
 	 */
 	int INVALID_ID = -1;
-
 
 }

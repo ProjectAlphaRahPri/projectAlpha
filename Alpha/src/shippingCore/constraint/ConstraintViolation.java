@@ -7,11 +7,8 @@ import service.util.Tool;
 /**
  * Class keeping the information of a hard constraint violation.
  * 
- * @author Last modified by $Author: kdo $
- * @version $Revision: 74397 $
  */
-public class ConstraintViolation implements Serializable
-{
+public class ConstraintViolation implements Serializable {
 	private static final long serialVersionUID = -7447893987778122370L;
 
 	/** The object which caused the violation */
@@ -27,15 +24,17 @@ public class ConstraintViolation implements Serializable
 	private double hardViolationStart;
 
 	/**
-	 * The route ID which is concerned to map the violation to the route on which
-	 * the violation occured
+	 * The route ID which is concerned to map the violation to the route on
+	 * which the violation occured
 	 */
 	private long concerningRouteID;
 
 	/** error code for this exception object */
 	private int errorCode;
 
-	/** flag that specifies if the violation is acceptable by manual dispatching */
+	/**
+	 * flag that specifies if the violation is acceptable by manual dispatching
+	 */
 	private boolean manualDispatchAcceptable = false;
 
 	private final boolean isHardViolation;
@@ -44,20 +43,25 @@ public class ConstraintViolation implements Serializable
 	 * Creates a <code>ConstraintViolation</code> with the specified detail
 	 * message.
 	 * 
-	 * @param description The detail message.
-	 * @param errorCode the code identifying the constraint broken
-	 * @param hardViolationStart the value at which hard constraint violations
-	 *        start
-	 * @param violationAmount the amount by which the violation was broken, 0.0
-	 *        if amount does not make sense
-	 * @param parent the object to which this constraint belongs
-	 * @param concerningRouteID the route ID to which this constraint belongs
+	 * @param description
+	 *            The detail message.
+	 * @param errorCode
+	 *            the code identifying the constraint broken
+	 * @param hardViolationStart
+	 *            the value at which hard constraint violations start
+	 * @param violationAmount
+	 *            the amount by which the violation was broken, 0.0 if amount
+	 *            does not make sense
+	 * @param parent
+	 *            the object to which this constraint belongs
+	 * @param concerningRouteID
+	 *            the route ID to which this constraint belongs
 	 * @param isHardViolation
 	 */
 	public ConstraintViolation(final String description, final int errorCode,
-			final double hardViolationStart, final double violationAmount, final Object parent,
-			final long concerningRouteID, boolean isHardViolation)
-	{
+			final double hardViolationStart, final double violationAmount,
+			final Object parent, final long concerningRouteID,
+			boolean isHardViolation) {
 		this.errorMessage = description;
 		this.errorCode = errorCode;
 		this.hardViolationStart = hardViolationStart;
@@ -70,8 +74,7 @@ public class ConstraintViolation implements Serializable
 	/**
 	 * @param hcv
 	 */
-	public ConstraintViolation(ConstraintViolation hcv, Object parent)
-	{
+	public ConstraintViolation(ConstraintViolation hcv, Object parent) {
 		this.parent = parent;
 		this.errorMessage = new String(hcv.errorMessage);
 		this.violationAmount = hcv.violationAmount;
@@ -85,65 +88,64 @@ public class ConstraintViolation implements Serializable
 	/**
 	 * @return Returns the hardViolationStart.
 	 */
-	public double getHardViolationStart()
-	{
+	public double getHardViolationStart() {
 		return hardViolationStart;
 	}
 
 	/**
 	 * Returns the error message for the constraint that was violated
+	 * 
 	 * @return the error message for the constraint that was violated
 	 */
-	public String getErrorMessage()
-	{
+	public String getErrorMessage() {
 		return errorMessage;
 	}
 
 	/**
 	 * Returns the error code for the constraint that was violated
+	 * 
 	 * @return the error code for the constraint that was violated
 	 */
-	public int getErrorCode()
-	{
+	public int getErrorCode() {
 		return errorCode;
 	}
 
 	/**
 	 * Returns the amount by which the violation was broken, 0.0 if amount does
 	 * not make sense
+	 * 
 	 * @return the amount by which the violation was broken, 0.0 if amount does
 	 *         not make sense
 	 */
-	public double getViolationAmount()
-	{
+	public double getViolationAmount() {
 		return violationAmount;
 	}
 
 	/**
 	 * Returns the object that caused the violation
+	 * 
 	 * @return the object that caused the violation
 	 */
-	public Object getParent()
-	{
+	public Object getParent() {
 		return parent;
 	}
 
 	/**
 	 * Returns the route ID which is concerned by this violation
+	 * 
 	 * @return the route ID which is concerned by this violation
 	 */
-	public long getRouteID()
-	{
+	public long getRouteID() {
 		return concerningRouteID;
 	}
 
 	/**
 	 * Returns a string representation of this object
+	 * 
 	 * @return a string representation of this object
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		StringBuffer buffer = new StringBuffer(100);
 		buffer.append(errorMessage);
 		buffer.append(" Violation amount: " + violationAmount);
@@ -154,11 +156,11 @@ public class ConstraintViolation implements Serializable
 	/**
 	 * Returns a string representation of this object not containing parent
 	 * object
+	 * 
 	 * @return a string representation of this object not containing parent
 	 *         object
 	 */
-	public String toStringShort()
-	{
+	public String toStringShort() {
 		StringBuffer buffer = new StringBuffer(100);
 		buffer.append(errorMessage);
 		buffer.append(" Violation amount: " + violationAmount);
@@ -169,11 +171,11 @@ public class ConstraintViolation implements Serializable
 	 * Sets flag that specifies if the violation is acceptable by manual
 	 * dispatching.
 	 * 
-	 * @param manualDispatchAcceptable Flag that specifies if the violation is
-	 *        acceptable by manual dispatching.
+	 * @param manualDispatchAcceptable
+	 *            Flag that specifies if the violation is acceptable by manual
+	 *            dispatching.
 	 */
-	public void setManualDispatchAcceptable(boolean manualDispatchAcceptable)
-	{
+	public void setManualDispatchAcceptable(boolean manualDispatchAcceptable) {
 		this.manualDispatchAcceptable = manualDispatchAcceptable;
 	}
 
@@ -181,14 +183,12 @@ public class ConstraintViolation implements Serializable
 	 * @return Returns flag that specifies if the violation is acceptable by
 	 *         manual dispatching.
 	 */
-	public boolean isManualDispatchAcceptable()
-	{
+	public boolean isManualDispatchAcceptable() {
 		return manualDispatchAcceptable;
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -201,15 +201,16 @@ public class ConstraintViolation implements Serializable
 				&& Tool.nullOrEqual(errorMessage, castObj.errorMessage)
 				&& violationAmount == castObj.violationAmount
 				&& hardViolationStart == castObj.hardViolationStart
-				&& concerningRouteID == castObj.concerningRouteID && errorCode == castObj.errorCode
+				&& concerningRouteID == castObj.concerningRouteID
+				&& errorCode == castObj.errorCode
 				&& manualDispatchAcceptable == castObj.manualDispatchAcceptable;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return Tool.hashcodeOrZero(parent) ^ Tool.hashcodeOrZero(errorMessage)
-				^ (int) violationAmount ^ (int) hardViolationStart ^ (int) concerningRouteID
-				^ errorCode ^ (manualDispatchAcceptable ? 64 : 8);
+				^ (int) violationAmount ^ (int) hardViolationStart
+				^ (int) concerningRouteID ^ errorCode
+				^ (manualDispatchAcceptable ? 64 : 8);
 	}
 }

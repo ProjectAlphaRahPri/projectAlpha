@@ -1,10 +1,6 @@
-package shippingCore;
+package service.properties;
 
-/**
- * @author Stefan Glaser
- */
-public interface IPropertiesConstants
-{
+public interface IPropertiesConstants {
 	String OPTIMIZEFROM_PROBLEM_DATA = "problemData";
 
 	String OPTIMIZEFROM_RESULT_FILE = "resultFile";

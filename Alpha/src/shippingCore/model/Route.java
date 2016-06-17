@@ -1,6 +1,3 @@
-/**
- * 
- */
 package shippingCore.model;
 
 import java.util.List;
@@ -8,13 +5,8 @@ import java.util.List;
 import shippingCore.calculations.time.TimeWindow;
 import shippingCore.cost.ICosts;
 
-
-/**
- * @author pritam
- *
- */
 public class Route {
-	
+
 	/** Unique identifier for this Route */
 	private long routeId;
 
@@ -35,13 +27,14 @@ public class Route {
 	/** Holds the real transportation costs */
 	private ICosts transportationCosts;
 
-	/** holding the costs caused by constraint violations (last calculateRoute) */
+	/**
+	 * holding the costs caused by constraint violations (last calculateRoute)
+	 */
 	private ICosts constraintCosts;
 
-//	/** If violations occur they will be added to this list */
-//	private List<ConstraintViolation> violations;
+	// /** If violations occur they will be added to this list */
+	// private List<ConstraintViolation> violations;
 
 	private boolean routeChanged;
-
 
 }

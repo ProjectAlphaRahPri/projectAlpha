@@ -1,26 +1,15 @@
-/*
- * Copyright (c) 2003 Living Systems (R) GmbH, Germany.
- * All rights reserved.
- * Original Author: Michael Fehrenbach
- *
- * $Source$
- * $Date: 2007-02-13 18:33:52 +0100 (Die, 13 Feb 2007) $
- */
 package service.exceptions;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import shippingCore.IConstants;
+import service.properties.IConstants;
 
 /**
- * Living systems base checked exception for all other checked exceptions.
+ * Systems base checked exception for all other checked exceptions.
  * 
- * @author Last modified by $Author: pzi $
- * @version $Revision: 74772 $
  */
-public class BaseException extends Exception
-{
+public class BaseException extends Exception {
 	/** */
 	private static final long serialVersionUID = 3850577893248579044L;
 
@@ -33,30 +22,30 @@ public class BaseException extends Exception
 	/**
 	 * Creates a <code>BaseException</code> with no specified detail message.
 	 */
-	public BaseException()
-	{
+	public BaseException() {
 		super("General living systems checked exception - no additional information available!");
 	}
 
 	/**
 	 * Creates a <code>BaseException</code> with the specified detail message.
 	 * 
-	 * @param description the reason for the exception
+	 * @param description
+	 *            the reason for the exception
 	 */
-	public BaseException(final String description)
-	{
+	public BaseException(final String description) {
 		super(description);
 	}
 
 	/**
-	 * Creates a <code>BaseException</code> with the specified detail message and
-	 * nested exception.
+	 * Creates a <code>BaseException</code> with the specified detail message
+	 * and nested exception.
 	 * 
-	 * @param description the reason for the exception
-	 * @param throwable the nested Throwable which caused the exception
+	 * @param description
+	 *            the reason for the exception
+	 * @param throwable
+	 *            the nested Throwable which caused the exception
 	 */
-	public BaseException(final String description, final Throwable throwable)
-	{
+	public BaseException(final String description, final Throwable throwable) {
 		super(description, throwable);
 		this.innerThrowable = throwable;
 	}
@@ -66,14 +55,14 @@ public class BaseException extends Exception
 	 *         nested exception if there is one.
 	 */
 	@Override
-	public String getMessage()
-	{
+	public String getMessage() {
 		if (innerThrowable == null) {
 			return super.getMessage();
 		}
 
 		// else ...
-		final StringBuffer message = new StringBuffer(IConstants.DEFAULT_STRING_BUFFER_SIZE);
+		final StringBuffer message = new StringBuffer(
+				IConstants.DEFAULT_STRING_BUFFER_SIZE);
 
 		if (super.getMessage() != null) {
 			message.append(super.getMessage());
@@ -97,8 +86,7 @@ public class BaseException extends Exception
 	 *         nested throwable, this is <em>not</em> mentioned in the short
 	 *         message!
 	 */
-	public String getShortMessage()
-	{
+	public String getShortMessage() {
 		return super.getMessage();
 	}
 
@@ -106,16 +94,14 @@ public class BaseException extends Exception
 	 * Prints the composite message to <code>System.err</code>.
 	 */
 	@Override
-	public void printStackTrace()
-	{
+	public void printStackTrace() {
 		printStackTrace(System.err);
 	}
 
 	/**
 	 * @return the nested throwable
 	 */
-	public Throwable getNestedThrowable()
-	{
+	public Throwable getNestedThrowable() {
 		return this.innerThrowable;
 	}
 }

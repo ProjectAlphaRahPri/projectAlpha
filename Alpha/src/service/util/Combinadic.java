@@ -6,10 +6,8 @@ package service.util;
 /**
  * Class for Combinatorial Number System or Combinadic. Implements methods that
  * count combinations and performs decimal-combinadic conversions.
- * @author Srinivasa Ragavan
  */
-public class Combinadic
-{
+public class Combinadic {
 
 	/**
 	 * @param k
@@ -17,8 +15,7 @@ public class Combinadic
 	 * @return int - number of possible 'k' combinations of 'n' elements<br>
 	 *         TODO method is not efficient
 	 */
-	public static int numberOfCombinations(int k, int n)
-	{
+	public static int numberOfCombinations(int k, int n) {
 		if (k == 0) {
 			return 0;
 		}
@@ -30,15 +27,17 @@ public class Combinadic
 	}
 
 	/**
-	 * @param decimal - index of the combination in lexicographic order
-	 * @param k - number of combining elements
-	 * @param n - total number of elements
+	 * @param decimal
+	 *            - index of the combination in lexicographic order
+	 * @param k
+	 *            - number of combining elements
+	 * @param n
+	 *            - total number of elements
 	 * @return int[] - combinadic
 	 * @see <a href= http://en.wikipedia.org/wiki/Combinatorial_number_system
 	 *      >Combinatorial Number System</a>
 	 */
-	public static int[] getCombinadicFromDecimal(int decimal, int k, int n)
-	{
+	public static int[] getCombinadicFromDecimal(int decimal, int k, int n) {
 		int[] combinadic = new int[k];
 
 		// I really don't know how to comment the code in the loop. But if you

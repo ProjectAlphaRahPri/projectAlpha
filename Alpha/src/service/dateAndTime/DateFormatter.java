@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import service.exceptions.InvalidArgumentException;
-import shippingCore.IConstants;
+import service.properties.IConstants;
 
 /**
  * This class is use to form the date object from a given string or string from
@@ -26,14 +26,11 @@ import shippingCore.IConstants;
  * 
  * It is possible to specify the different style (for example
  * dateformatter.formatDate(date, DateFormat.Long)) to get the date as string.
- * 
- * @author Last modified by $Author: mle $
- * @version $Revision: 79369 $
  */
-public class DateFormatter
-{
+public class DateFormatter {
 	/** for proper date formatting for logfiles */
-	private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+	private static final SimpleDateFormat formatter = new SimpleDateFormat(
+			"yyyy.MM.dd HH:mm");
 
 	/** used to format the date */
 	private static final String DELIMITER = "/";
@@ -74,18 +71,17 @@ public class DateFormatter
 	/**
 	 * Constructor which sets the locale from JVM
 	 */
-	public DateFormatter()
-	{
+	public DateFormatter() {
 		this.locale = Locale.getDefault();
 	}
 
 	/**
 	 * Constuctor allow to specify the locale
 	 * 
-	 * @param locale the locel which need to be set
+	 * @param locale
+	 *            the locel which need to be set
 	 */
-	private DateFormatter(Locale locale)
-	{
+	private DateFormatter(Locale locale) {
 		this.locale = locale;
 	}
 
@@ -97,35 +93,41 @@ public class DateFormatter
 	 * (22-99)-->(1922-1999)
 	 * 
 	 * 
-	 * @param day Day of month (eg. '5', '06', '23', etc).
-	 * @param month Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
-	 * @param year Year part of the date (eg. '1972', '2003', '93',etc) it should
-	 *        conatain either two digit or four digit number as string
+	 * @param day
+	 *            Day of month (eg. '5', '06', '23', etc).
+	 * @param month
+	 *            Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
+	 * @param year
+	 *            Year part of the date (eg. '1972', '2003', '93',etc) it should
+	 *            conatain either two digit or four digit number as string
 	 * @return date object from the given string
-	 * @throws DateFormatterException if the date creation fails or date is
-	 *         invalid
+	 * @throws DateFormatterException
+	 *             if the date creation fails or date is invalid
 	 */
-	public Date parseDate(String day, String month, String year) throws DateFormatterException
-	{
+	public Date parseDate(String day, String month, String year)
+			throws DateFormatterException {
 		return parseDate(null, null, null, day, month, year);
 	}
 
 	/**
 	 * Forming the date from hours,day, month and year. month value could be
-	 * either text string (Mai, May, depeneds on the locale) or number string and
-	 * other values should be number string.
+	 * either text string (Mai, May, depeneds on the locale) or number string
+	 * and other values should be number string.
 	 * 
-	 * @param hours Hours of the day (eg. 0-23)
-	 * @param day Day of month (eg. '5', '06', '23', etc).
-	 * @param month Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
-	 * @param year Year part of the date (eg. '1972', '2003', etc)
+	 * @param hours
+	 *            Hours of the day (eg. 0-23)
+	 * @param day
+	 *            Day of month (eg. '5', '06', '23', etc).
+	 * @param month
+	 *            Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
+	 * @param year
+	 *            Year part of the date (eg. '1972', '2003', etc)
 	 * @return date object from the given string
-	 * @throws DateFormatterException if the date creation fails or date is
-	 *         invalid
+	 * @throws DateFormatterException
+	 *             if the date creation fails or date is invalid
 	 */
 	public Date parseDate(String hours, String day, String month, String year)
-			throws DateFormatterException
-	{
+			throws DateFormatterException {
 		return parseDate(null, null, hours, day, month, year);
 	}
 
@@ -134,18 +136,22 @@ public class DateFormatter
 	 * could be either text string (Mai, May, depeneds on the locale) or number
 	 * string and other values should be number string
 	 * 
-	 * @param minutes Minutes of hour (eg. 0-59)
-	 * @param hours Hours of day (eg. 0-23)
-	 * @param day Day of month (eg. '5', '06', '23', etc).
-	 * @param month Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
-	 * @param year Year part of the date (eg. '1972', '2003', etc)
+	 * @param minutes
+	 *            Minutes of hour (eg. 0-59)
+	 * @param hours
+	 *            Hours of day (eg. 0-23)
+	 * @param day
+	 *            Day of month (eg. '5', '06', '23', etc).
+	 * @param month
+	 *            Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
+	 * @param year
+	 *            Year part of the date (eg. '1972', '2003', etc)
 	 * @return date object from the given string
-	 * @throws DateFormatterException if the date creation fails or date is
-	 *         invalid
+	 * @throws DateFormatterException
+	 *             if the date creation fails or date is invalid
 	 */
-	public Date parseDate(String minutes, String hours, String day, String month, String year)
-			throws DateFormatterException
-	{
+	public Date parseDate(String minutes, String hours, String day,
+			String month, String year) throws DateFormatterException {
 		return parseDate(null, minutes, hours, day, month, year);
 	}
 
@@ -154,25 +160,34 @@ public class DateFormatter
 	 * value could be either text string (Mai, May, depeneds on the locale) or
 	 * number string and other values should be number string
 	 * 
-	 * @param second Second of the hour (eg. 0-59)
-	 * @param minutes Minutes of hour (eg. 0-59)
-	 * @param hours Hours of day (eg. 0-23)
-	 * @param day Day of month (eg. '5', '06', '23', etc).
-	 * @param month Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
-	 * @param year Year part of the date (eg. '1972', '2003','93','34' etc)
+	 * @param second
+	 *            Second of the hour (eg. 0-59)
+	 * @param minutes
+	 *            Minutes of hour (eg. 0-59)
+	 * @param hours
+	 *            Hours of day (eg. 0-23)
+	 * @param day
+	 *            Day of month (eg. '5', '06', '23', etc).
+	 * @param month
+	 *            Month of year (eg. '1', '03', 'Jan', 'May', 'Mai', etc).
+	 * @param year
+	 *            Year part of the date (eg. '1972', '2003','93','34' etc)
 	 * @return date object from the given string
-	 * @throws DateFormatterException if the date creation fails or date is
-	 *         invalid
+	 * @throws DateFormatterException
+	 *             if the date creation fails or date is invalid
 	 */
-	public Date parseDate(String second, String minutes, String hours, String day, String month,
-			String year) throws DateFormatterException
-	{
-		StringBuffer pattern = new StringBuffer(IConstants.DEFAULT_STRING_BUFFER_SIZE);
-		StringBuffer dateString = new StringBuffer(IConstants.DEFAULT_STRING_BUFFER_SIZE);
+	public Date parseDate(String second, String minutes, String hours,
+			String day, String month, String year)
+					throws DateFormatterException {
+		StringBuffer pattern = new StringBuffer(
+				IConstants.DEFAULT_STRING_BUFFER_SIZE);
+		StringBuffer dateString = new StringBuffer(
+				IConstants.DEFAULT_STRING_BUFFER_SIZE);
 		boolean parseOk = false;
 
-		if ((day != null) && (day.length() > 0) && (month != null) && (month.length() > 0)
-				&& (year != null) && (year.length() > 0)) {
+		if ((day != null) && (day.length() > 0) && (month != null)
+				&& (month.length() > 0) && (year != null)
+				&& (year.length() > 0)) {
 			pattern.append("dd");
 			dateString.append(day);
 
@@ -226,18 +241,20 @@ public class DateFormatter
 	/**
 	 * Forming the date from the given date as string and the pattern
 	 * 
-	 * @param dateString date as string which is used to form the date
-	 * @param pattern the pattern to form the date
+	 * @param dateString
+	 *            date as string which is used to form the date
+	 * @param pattern
+	 *            the pattern to form the date
 	 * @return date object from the given string
-	 * @throws DateFormatterException if the date formation fails or date is
-	 *         invalid
-	 * @throws InvalidArgumentException if the dateString or pattern is null
+	 * @throws DateFormatterException
+	 *             if the date formation fails or date is invalid
+	 * @throws InvalidArgumentException
+	 *             if the dateString or pattern is null
 	 */
-	public Date getDate(String dateString, String pattern) throws DateFormatterException,
-			InvalidArgumentException
-	{
-		if ((dateString == null) || (dateString.length() == 0) || (pattern == null)
-				|| (pattern.length() == 0)) {
+	public Date getDate(String dateString, String pattern)
+			throws DateFormatterException, InvalidArgumentException {
+		if ((dateString == null) || (dateString.length() == 0)
+				|| (pattern == null) || (pattern.length() == 0)) {
 			throw new InvalidArgumentException("the given string is null");
 		}
 
@@ -255,15 +272,18 @@ public class DateFormatter
 			return parseDate(dateString, LONG_STYLE);
 		}
 
-		SimpleDateFormat simpledateformat = new SimpleDateFormat(pattern, this.locale);
+		SimpleDateFormat simpledateformat = new SimpleDateFormat(pattern,
+				this.locale);
 
 		simpledateformat.setLenient(true);
 
 		try {
 			date = simpledateformat.parse(dateString);
 		} catch (ParseException parseexception) {
-			throw new DateFormatterException("Forming the date '" + dateString
-					+ "' has failed : format used: " + pattern, parseexception);
+			throw new DateFormatterException(
+					"Forming the date '" + dateString
+							+ "' has failed : format used: " + pattern,
+					parseexception);
 		}
 
 		return date;
@@ -273,14 +293,16 @@ public class DateFormatter
 	 * Forming the date from the given string. The date string will be checked
 	 * using the locale and with the default style
 	 * 
-	 * @param dateString string representation of date
+	 * @param dateString
+	 *            string representation of date
 	 * @return date object from the string
-	 * @throws DateFormatterException if date object creation fails or date is
-	 *         invalid
-	 * @throws InvalidArgumentException if the dateString is null
+	 * @throws DateFormatterException
+	 *             if date object creation fails or date is invalid
+	 * @throws InvalidArgumentException
+	 *             if the dateString is null
 	 */
-	public Date parseDate(String dateString) throws DateFormatterException, InvalidArgumentException
-	{
+	public Date parseDate(String dateString)
+			throws DateFormatterException, InvalidArgumentException {
 		return parseDate(dateString, DEFAULT_STYLE);
 	}
 
@@ -288,16 +310,18 @@ public class DateFormatter
 	 * Forming the date from the given string. The datestring will be checked
 	 * using the locale
 	 * 
-	 * @param dateString string representation of date
-	 * @param style the given formatting style
+	 * @param dateString
+	 *            string representation of date
+	 * @param style
+	 *            the given formatting style
 	 * @return The new created date object
-	 * @throws DateFormatterException if date object creation fails or date is
-	 *         invalid
-	 * @throws InvalidArgumentException if the dateString is null
+	 * @throws DateFormatterException
+	 *             if date object creation fails or date is invalid
+	 * @throws InvalidArgumentException
+	 *             if the dateString is null
 	 */
-	public Date parseDate(String dateString, int style) throws DateFormatterException,
-			InvalidArgumentException
-	{
+	public Date parseDate(String dateString, int style)
+			throws DateFormatterException, InvalidArgumentException {
 		if ((dateString == null) || (dateString.length() == 0)) {
 			throw new InvalidArgumentException("the given string is null");
 		}
@@ -311,7 +335,8 @@ public class DateFormatter
 		try {
 			date = dateformat.parse(dateString);
 		} catch (ParseException parseexception) {
-			throw new DateFormatterException("Forming the date is failed: ", parseexception);
+			throw new DateFormatterException("Forming the date is failed: ",
+					parseexception);
 		}
 
 		return date;
@@ -321,16 +346,18 @@ public class DateFormatter
 	 * Return a string containing the formatted date from the given date. Date
 	 * will be converted to string using the locale and with the default style
 	 * 
-	 * @param date the date which need to be formatted
-	 * @param pattern pattern to format the date object
+	 * @param date
+	 *            the date which need to be formatted
+	 * @param pattern
+	 *            pattern to format the date object
 	 * @return string containing the formatted date from the given date
-	 * @throws DateFormatterException if date object creation fails or date is
-	 *         invalid
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws DateFormatterException
+	 *             if date object creation fails or date is invalid
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String format(Date date, String pattern) throws DateFormatterException,
-			InvalidArgumentException
-	{
+	public String format(Date date, String pattern)
+			throws DateFormatterException, InvalidArgumentException {
 		if ((date == null) || (pattern == null) || (pattern.length() == 0)) {
 			throw new InvalidArgumentException("date or pattern is null");
 		}
@@ -357,14 +384,16 @@ public class DateFormatter
 				Integer intDateStyle = styleMap.get(dateStyle);
 
 				if ((intTimeStyle != null) && (intDateStyle != null)) {
-					return formatDateTime(date, intDateStyle.intValue(), intTimeStyle.intValue());
+					return formatDateTime(date, intDateStyle.intValue(),
+							intTimeStyle.intValue());
 				}
 			}
 
 			throw new DateFormatterException("Pattern is wrong : " + pattern);
 		}
 
-		SimpleDateFormat simpleDateformat = new SimpleDateFormat(pattern, this.locale);
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat(pattern,
+				this.locale);
 
 		return simpleDateformat.format(date);
 	}
@@ -373,18 +402,22 @@ public class DateFormatter
 	 * Return a string containing the formatted date from the given date. Date
 	 * will be converted to string using the locale and with the default style
 	 * 
-	 * @param date the date which need to cbe formatted
-	 * @param pattern pattern to format the date object
+	 * @param date
+	 *            the date which need to cbe formatted
+	 * @param pattern
+	 *            pattern to format the date object
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatDate(Date date, String pattern) throws InvalidArgumentException
-	{
+	public String formatDate(Date date, String pattern)
+			throws InvalidArgumentException {
 		if ((date == null) || (pattern == null) || (pattern.length() == 0)) {
 			throw new InvalidArgumentException("date or pattern is null");
 		}
 
-		SimpleDateFormat simpleDateformat = new SimpleDateFormat(pattern, this.locale);
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat(pattern,
+				this.locale);
 
 		return simpleDateformat.format(date);
 	}
@@ -393,12 +426,13 @@ public class DateFormatter
 	 * Return a string containing the formatted date from the given date. Date
 	 * will be converted to string using the locale and with the default style
 	 * 
-	 * @param date the date which need to be formatted
+	 * @param date
+	 *            the date which need to be formatted
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatDate(Date date) throws InvalidArgumentException
-	{
+	public String formatDate(Date date) throws InvalidArgumentException {
 		return formatDate(date, DEFAULT_STYLE);
 	}
 
@@ -406,8 +440,7 @@ public class DateFormatter
 	 * @param millis
 	 * @return String representation of the millis as Date
 	 */
-	public static String formatDate(long millis)
-	{
+	public static String formatDate(long millis) {
 		return new Date(millis).toString();
 	}
 
@@ -415,13 +448,16 @@ public class DateFormatter
 	 * Return a string containing the formatted date from the given date. Date
 	 * will be converted to string using the locale.
 	 * 
-	 * @param date the date which need to cbe formatted
-	 * @param style the given formatting style
+	 * @param date
+	 *            the date which need to cbe formatted
+	 * @param style
+	 *            the given formatting style
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatDate(Date date, int style) throws InvalidArgumentException
-	{
+	public String formatDate(Date date, int style)
+			throws InvalidArgumentException {
 		if (date == null) {
 			throw new InvalidArgumentException("date is null");
 		}
@@ -435,12 +471,13 @@ public class DateFormatter
 	 * Return a string containing the formatted time from the given date. Date
 	 * will be converted to string using the locale and with the default style
 	 * 
-	 * @param date the date which need to be formatted
+	 * @param date
+	 *            the date which need to be formatted
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatTime(Date date) throws InvalidArgumentException
-	{
+	public String formatTime(Date date) throws InvalidArgumentException {
 		return formatTime(date, DEFAULT_STYLE);
 	}
 
@@ -448,13 +485,16 @@ public class DateFormatter
 	 * Return a string containing the formatted time from the given date. Date
 	 * will be converted to string using the locale.
 	 * 
-	 * @param date the date which need to cbe formatted
-	 * @param style the given formatting style
+	 * @param date
+	 *            the date which need to cbe formatted
+	 * @param style
+	 *            the given formatting style
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatTime(Date date, int style) throws InvalidArgumentException
-	{
+	public String formatTime(Date date, int style)
+			throws InvalidArgumentException {
 		if (date == null) {
 			throw new InvalidArgumentException("date is null");
 		}
@@ -468,12 +508,13 @@ public class DateFormatter
 	 * Return a string containing the formatted date and time from the given
 	 * date. Date will be converted to string using the locale.
 	 * 
-	 * @param date the date which need to cbe formatted
+	 * @param date
+	 *            the date which need to cbe formatted
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
-	public String formatDateTime(Date date) throws InvalidArgumentException
-	{
+	public String formatDateTime(Date date) throws InvalidArgumentException {
 		return formatDateTime(date, DEFAULT_STYLE, DEFAULT_STYLE);
 	}
 
@@ -482,20 +523,24 @@ public class DateFormatter
 	 * date. Date will be converted to string using the locale and with the
 	 * default style.
 	 * 
-	 * @param date the date which need to cbe formatted
-	 * @param dateStyle the style for date
-	 * @param timeStyle the style for time
+	 * @param date
+	 *            the date which need to cbe formatted
+	 * @param dateStyle
+	 *            the style for date
+	 * @param timeStyle
+	 *            the style for time
 	 * @return string containing the formatted date from the given date
-	 * @throws InvalidArgumentException if the date object is null
+	 * @throws InvalidArgumentException
+	 *             if the date object is null
 	 */
 	public String formatDateTime(Date date, int dateStyle, int timeStyle)
-			throws InvalidArgumentException
-	{
+			throws InvalidArgumentException {
 		if (date == null) {
 			throw new InvalidArgumentException("date is null");
 		}
 
-		DateFormat dateformat = DateFormat.getDateTimeInstance(dateStyle, timeStyle, this.locale);
+		DateFormat dateformat = DateFormat.getDateTimeInstance(dateStyle,
+				timeStyle, this.locale);
 
 		return dateformat.format(date);
 	}
@@ -503,11 +548,11 @@ public class DateFormatter
 	/**
 	 * returns an instance of DateFormatter class with the specific locale
 	 * 
-	 * @param locale locale to create the instance of the DateFromatter
+	 * @param locale
+	 *            locale to create the instance of the DateFromatter
 	 * @return DateFormatter with specif locale
 	 */
-	public static DateFormatter getDateFormatterInstance(Locale locale)
-	{
+	public static DateFormatter getDateFormatterInstance(Locale locale) {
 		DateFormatter formatter = null;
 
 		synchronized (formatterHash) {
@@ -530,16 +575,18 @@ public class DateFormatter
 	/**
 	 * return token from the given string
 	 * 
-	 * @param pattern string for tokenized
+	 * @param pattern
+	 *            string for tokenized
 	 * @return a map containing all the token
 	 */
-	private Map<Object, Object> getToken(String pattern)
-	{
+	private Map<Object, Object> getToken(String pattern) {
 		HashMap<Object, Object> hashMap = new HashMap<Object, Object>();
-		StringTokenizer stringTokenizer = new StringTokenizer(pattern, TOKEN_DELIMITER);
+		StringTokenizer stringTokenizer = new StringTokenizer(pattern,
+				TOKEN_DELIMITER);
 
 		while (stringTokenizer.hasMoreTokens()) {
-			hashMap.put(stringTokenizer.nextElement(), stringTokenizer.nextElement());
+			hashMap.put(stringTokenizer.nextElement(),
+					stringTokenizer.nextElement());
 		}
 
 		return hashMap;
@@ -548,21 +595,19 @@ public class DateFormatter
 	/**
 	 * @return thread-safe common Formatter for date formatting
 	 */
-	public static SimpleDateFormat getSimpleFormatter()
-	{
+	public static SimpleDateFormat getSimpleFormatter() {
 		// SimpleDateFormat is not thread-safe, so we need to return separate
 		// instance for each call
-		return (SimpleDateFormat) formatter.clone(); // NOPMD by pzi on 2/19/09
-		// 5:10 PM
+		return (SimpleDateFormat) formatter.clone();
 	}
 
 	/**
 	 * to test the functions
 	 * 
-	 * @param args command line arguments
+	 * @param args
+	 *            command line arguments
 	 */
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		DateFormatter dateFormatter = new DateFormatter();
 		String dateString = null;
 

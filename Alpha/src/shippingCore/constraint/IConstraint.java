@@ -1,15 +1,13 @@
 package shippingCore.constraint;
 
-import shippingCore.IConstants;
+import service.properties.IConstants;
 import shippingCore.model.Route;
 
 /**
  * Interface defining the basic behavior of constraints
  * 
- * @author Srinivasa Ragavan
  */
-public interface IConstraint
-{
+public interface IConstraint {
 	/*
 	 * BEGIN Constants - Error codes, Basic costs and others
 	 */
@@ -85,7 +83,9 @@ public interface IConstraint
 	/** error code for arriving too early at a node */
 	public final static int NO_TIME_AT_NODE = 270;
 
-	/** requested delivery or pickup is outside earliest-latest delivery pickup */
+	/**
+	 * requested delivery or pickup is outside earliest-latest delivery pickup
+	 */
 	public final static int ORDER_TIMES_INCONSISTENT = 280;
 
 	/** error code for too much empty kilometers in a leg */
@@ -173,25 +173,29 @@ public interface IConstraint
 	public final static double EARLIEST_PICKUP_TIME_VIOLATION_FIXCOST = 1e11;
 
 	/** variable cost for early pickup violation per minute */
-	public final static double EARLIEST_PICKUP_TIME_VIOLATION_VARIABLECOST = 1.0 / IConstants.MINUTE;
+	public final static double EARLIEST_PICKUP_TIME_VIOLATION_VARIABLECOST = 1.0
+			/ IConstants.MINUTE;
 
 	/** fix cost for latest pickup violation */
 	public final static double LATEST_PICKUP_TIME_VIOLATION_FIXCOST = 1e12;
 
 	/** variable cost for latest pickup violation per minute */
-	public final static double LATEST_PICKUP_TIME_VIOLATION_VARIABLECOST = 1.0 / IConstants.MINUTE;
+	public final static double LATEST_PICKUP_TIME_VIOLATION_VARIABLECOST = 1.0
+			/ IConstants.MINUTE;
 
 	/** fix cost for early delivery violation */
 	public final static double EARLIEST_DELIVERY_TIME_VIOLATION_FIXCOST = 1e11;
 
 	/** variable cost for earliest delivery violation per minute */
-	public final static double EARLIEST_DELIVERY_TIME_VIOLATION_VARIABLECOST = 1.0 / IConstants.MINUTE;
+	public final static double EARLIEST_DELIVERY_TIME_VIOLATION_VARIABLECOST = 1.0
+			/ IConstants.MINUTE;
 
 	/** fix cost for latest delivery violation */
 	public final static double LATEST_DELIVERY_TIME_VIOLATION_FIXCOST = 1e12;
 
 	/** variable cost for latest delivery violation per minute */
-	public final static double LATEST_DELIVERY_TIME_VIOLATION_VARIABLECOST = 1.0 / IConstants.MINUTE;
+	public final static double LATEST_DELIVERY_TIME_VIOLATION_VARIABLECOST = 1.0
+			/ IConstants.MINUTE;
 
 	/** fix cost for staying too long at a node */
 	public final static double STAY_AT_NODE_TIME_VIOLATION_FIXCOST = 1e7;
@@ -241,25 +245,31 @@ public interface IConstraint
 
 	/**
 	 * Called to check the passed value against this constraint.
-	 * @param nodeIndex - index of the node on which to check the constraint.
-	 *        Each Constraint decides how to use the index (<b>from/to/on</b> the
-	 *        <tt>nodeIndex</tt>.)
-	 * @param value - the value that is checked if it satisfies this constraint.
-	 * @param parent - the route/order to which this constraint belongs
-	 * @param route - the route to which this constraint belongs
+	 * 
+	 * @param nodeIndex
+	 *            - index of the node on which to check the constraint. Each
+	 *            Constraint decides how to use the index (<b>from/to/on</b> the
+	 *            <tt>nodeIndex</tt>.)
+	 * @param value
+	 *            - the value that is checked if it satisfies this constraint.
+	 * @param parent
+	 *            - the route/order to which this constraint belongs
+	 * @param route
+	 *            - the route to which this constraint belongs
 	 * @return double 0.0 if the constraint is not violated, a cost value if the
 	 *         constraint is violated
 	 * @throws HardConstraintException
 	 */
-	public double check(int nodeIndex, final double value, final Object parent, final Route route)
-			throws HardConstraintException;
+	public double check(int nodeIndex, final double value, final Object parent,
+			final Route route) throws HardConstraintException;
 
 	/**
 	 * To get violation boundaries/limits for each parent Object. It is the
-	 * border up to (if isUpward is true) or down to (if isUpward is false) which
-	 * the constraint is not violated (border not including).
+	 * border up to (if isUpward is true) or down to (if isUpward is false)
+	 * which the constraint is not violated (border not including).
 	 * 
-	 * @param parent the parent Object on whom the constraints are checked
+	 * @param parent
+	 *            the parent Object on whom the constraints are checked
 	 */
 	public double getViolationStart(Object parent);
 
@@ -270,5 +280,4 @@ public interface IConstraint
 	public double getBaseCostForViolation();
 
 	public boolean isSoftViolationAllowed(Object parent);
-
 }

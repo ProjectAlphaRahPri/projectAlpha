@@ -1,11 +1,6 @@
 package shippingCore.constraint;
 
-
-public class HardConstraintException extends Exception
-{
-	/**
-	 * 
-	 */
+public class HardConstraintException extends Exception {
 	private static final long serialVersionUID = -5137044457112624195L;
 
 	/** The object which caused the violation */
@@ -14,35 +9,36 @@ public class HardConstraintException extends Exception
 	/**
 	 * Default constructor
 	 */
-	public HardConstraintException()
-	{
+	public HardConstraintException() {
 		super();
 	}
 
 	/**
 	 * stores the violation object that describes the violation
-	 * @param violation a reference to the hard constraint violation object
+	 * 
+	 * @param violation
+	 *            a reference to the hard constraint violation object
 	 */
-	public HardConstraintException(final ConstraintViolation violation)
-	{
+	public HardConstraintException(final ConstraintViolation violation) {
 		this.violation = violation;
 	}
 
 	/**
 	 * returns the violation object that describes the violation
+	 * 
 	 * @return the violation this exception represents
 	 */
-	public ConstraintViolation getViolation()
-	{
+	public ConstraintViolation getViolation() {
 		return violation;
 	}
 
 	/**
 	 * Returns a string representation of this object
+	 * 
 	 * @return a string representation of this object
 	 */
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		if (violation != null) {
 			return violation.toString();
 		}
